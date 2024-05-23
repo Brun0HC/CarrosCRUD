@@ -57,7 +57,7 @@ function App() {
       try {
         const { id, ...car } = carData;
         const method = id ? 'PUT' : 'POST';
-        const url = id ? 'https://ifsp.ddns.net/webservices/carro/carro/${id}' : 'https://ifsp.ddns.net/webservices/carro/carro';
+        const url = id ? `https://ifsp.ddns.net/webservices/carro/carro/${id}` : 'https://ifsp.ddns.net/webservices/carro/carro';
         const response = await fetch(url, {
           method: method,
           headers: {
@@ -88,7 +88,7 @@ function App() {
     const handleDelete = async (id) => {
       if (window.confirm('Tem certeza que deseja excluir este carro?')) {
         try {
-          const response = await fetch('https://ifsp.ddns.net/webservices/carro/carro/${id}', {
+          const response = await fetch(`https://ifsp.ddns.net/webservices/carro/carro/${id}`, {
             method: 'DELETE'
           });
           if (response.ok) {
