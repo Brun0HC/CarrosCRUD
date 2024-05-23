@@ -57,7 +57,7 @@ function App() {
       try {
         const { id, ...car } = carData;
         const method = id ? 'PUT' : 'POST';
-        const url = id ? `https://ifsp.ddns.net/webservices/carro/carro/${id}` : 'https://ifsp.ddns.net/webservices/carro/carro';
+        const url = id ? 'https://ifsp.ddns.net/webservices/carro/carro/${id}' : 'https://ifsp.ddns.net/webservices/carro/carro';
         const response = await fetch(url, {
           method: method,
           headers: {
@@ -88,7 +88,7 @@ function App() {
     const handleDelete = async (id) => {
       if (window.confirm('Tem certeza que deseja excluir este carro?')) {
         try {
-          const response = await fetch(`https://ifsp.ddns.net/webservices/carro/carro/${id}`, {
+          const response = await fetch('https://ifsp.ddns.net/webservices/carro/carro/${id}', {
             method: 'DELETE'
           });
           if (response.ok) {
@@ -137,8 +137,38 @@ function App() {
           ))}
         </tbody>
       </table>
+
+      <h1>Formulario de Carros</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="hidden" name="id" value={carData.id} />
+        <label>
+          Nome:
+          <input type="text" name="nome" value={carData.nome} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Ano:
+          <input type="number" name="ano" value={carData.ano} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Potência:
+          <input type="text" name="potencia" value={carData.potencia} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Preço:
+          <input type="number" name="preco" value={carData.preco} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Fabricante:
+          <input type="text" name="fabricante" value={carData.fabricante} onChange={handleChange} />
+        </label>
+        <br />
+        <button type="submit">Enviar</button>
+      </form>
       </div>
-      <a href="./TabelaCarros.jsx">Visualizar Tabela</a>
     </>
   );
 }
