@@ -33,4 +33,13 @@ public class Tests {
 
         assertTrue(driver.getTitle().contains("Carros"), "O título da página está correto");
     }
+
+    @Test
+    public void testElementIsPresent() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement addButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+        assertTrue(addButton.isDisplayed(), "O botão 'Enviar' está presente");
+    }
+
 }
