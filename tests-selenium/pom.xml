@@ -15,9 +15,14 @@
     </properties>
 
     <dependency>
+
+        //driver
+
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>
         <version>4.21.0</version>
+
+
     </dependency>
 
 </project>
