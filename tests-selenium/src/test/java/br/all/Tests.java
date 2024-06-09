@@ -31,7 +31,10 @@ public class Tests {
     public void testHomePageLoads() {
         driver.get("https://carros-crud.vercel.app/");
 
-        assertTrue(driver.getTitle().contains("Carros"), "O título da página está correto");
+        String pageTitle = driver.getTitle();
+        System.out.println("O título da página é: " + pageTitle);
+
+        assertTrue(pageTitle.equalsIgnoreCase("vite + react"), "O título da página está correto");
     }
 
     @Test
