@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -178,9 +179,12 @@ public class Tests {
         WebElement form = driver.findElement(By.tagName("form"));
         assertTrue(form.isDisplayed(), "Form is present on the page");
     }
-
-
-
+    @Test
+    public void testEditButtonsArePresent() {
+        driver.get("https://carros-crud.vercel.app/");
+        List<WebElement> editButtons = driver.findElements(By.xpath("//button[contains(text(),'Editar')]"));
+        assertFalse(editButtons.size() > 0, "Edit buttons are present on the page");
+    }
 }
 
 
