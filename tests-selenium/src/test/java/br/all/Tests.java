@@ -12,8 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Tests {
 
@@ -111,6 +110,19 @@ public class Tests {
 
 
     }
+
+    @Test
+    public void testNomeFieldAcceptsOnlyStrings() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement nomeField = driver.findElement(By.name("nome"));
+        nomeField.sendKeys("123");
+
+        String enteredText = nomeField.getAttribute("value");
+
+        assertFalse(!enteredText.matches(".*\\d.*"), "Nome field accepts only strings");
+    }
+
 
 
 }
