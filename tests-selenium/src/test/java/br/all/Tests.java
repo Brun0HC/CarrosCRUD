@@ -123,6 +123,18 @@ public class Tests {
         assertFalse(!enteredText.matches(".*\\d.*"), "Nome field accepts only strings");
     }
 
+    @Test
+    public void testFabricanteFieldAcceptsOnlyStrings() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement fabricanteField = driver.findElement(By.name("fabricante"));
+        fabricanteField.sendKeys("123");
+
+        String enteredText = fabricanteField.getAttribute("value");
+
+        assertFalse(!enteredText.matches(".*\\d.*"), "Fabricante field accepts only strings");
+    }
+
 
 
 }
