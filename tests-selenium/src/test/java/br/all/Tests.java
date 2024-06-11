@@ -78,6 +78,41 @@ public class Tests {
 
     }
 
+    @Test
+    public void testEditButtonFunctionality() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+
+        WebElement editButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Editar')]")));
+        editButton.click();
+
+        WebElement nomeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nome")));
+        WebElement anoField = driver.findElement(By.name("ano"));
+        WebElement potenciaField = driver.findElement(By.name("potencia"));
+        WebElement precoField = driver.findElement(By.name("preco"));
+        WebElement fabricanteField = driver.findElement(By.name("fabricante"));
+
+        // Editamos os campos com novos valores
+        nomeField.clear();
+        nomeField.sendKeys("Carro Editado");
+        anoField.clear();
+        anoField.sendKeys("2024");
+        potenciaField.clear();
+        potenciaField.sendKeys("180");
+        precoField.clear();
+        precoField.sendKeys("60000");
+        fabricanteField.clear();
+        fabricanteField.sendKeys("Fabricante Editado");
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Editar')]"));
+        submitButton.click();
+
+
+    }
+
+
 }
 
 
