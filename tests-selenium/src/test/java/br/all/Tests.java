@@ -149,6 +149,21 @@ public class Tests {
         assertFalse(enteredText.matches("^[0-9]*$"), "Potência field accepts only numbers");
     }
 
+    @Test
+    public void testFormTitlePresence() {
+
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement h1Element = driver.findElement(By.tagName("h1"));
+
+        assertFalse(h1Element.getText().equals("Formulário de Carros"), "The <h1> element contains 'Formulário de Carros'");
+
+        driver.quit();
+    }
+
 
 
 }
