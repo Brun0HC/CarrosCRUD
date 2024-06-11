@@ -7,6 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Tests {
@@ -45,4 +51,33 @@ public class Tests {
         assertTrue(addButton.isDisplayed(), "O botão 'Enviar' está presente");
     }
 
+
+    @Test
+    public void testCarFormSubmission() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement nomeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nome")));
+        nomeField.sendKeys("Teste Carro");
+
+        WebElement anoField = driver.findElement(By.name("ano"));
+        anoField.sendKeys("2023");
+
+        WebElement potenciaField = driver.findElement(By.name("potencia"));
+        potenciaField.sendKeys("150");
+
+        WebElement precoField = driver.findElement(By.name("preco"));
+        precoField.sendKeys("50000");
+
+        WebElement fabricanteField = driver.findElement(By.name("fabricante"));
+        fabricanteField.sendKeys("Teste Fabricante");
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+        submitButton.click();
+
+    }
+
 }
+
+
