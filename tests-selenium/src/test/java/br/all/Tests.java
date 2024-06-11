@@ -125,6 +125,7 @@ public class Tests {
 
     @Test
     public void testFabricanteFieldAcceptsOnlyStrings() {
+
         driver.get("https://carros-crud.vercel.app/");
 
         WebElement fabricanteField = driver.findElement(By.name("fabricante"));
