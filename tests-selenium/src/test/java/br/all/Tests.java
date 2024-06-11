@@ -136,6 +136,19 @@ public class Tests {
         assertFalse(!enteredText.matches(".*\\d.*"), "Fabricante field accepts only strings");
     }
 
+    @Test
+    public void testPotenciaFieldAcceptsOnlyNumbers() {
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement potenciaField = driver.findElement(By.name("potencia"));
+
+        potenciaField.sendKeys("abc123");
+
+        String enteredText = potenciaField.getAttribute("value");
+
+        assertFalse(enteredText.matches("^[0-9]*$"), "Potência field accepts only numbers");
+    }
+
 
 
 }
