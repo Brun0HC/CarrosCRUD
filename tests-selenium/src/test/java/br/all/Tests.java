@@ -164,6 +164,14 @@ public class Tests {
         driver.quit();
     }
 
+    @Test
+    public void testTableIsNotPresent() {
+        driver.get("https://carros-crud.vercel.app/");
+        boolean isTablePresent = driver.findElements(By.className("styled-table")).size() > 0;
+        assertFalse(!isTablePresent, "Table is not present on the page");
+    }
+
+
 
 
 }
