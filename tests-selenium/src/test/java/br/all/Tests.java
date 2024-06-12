@@ -200,6 +200,20 @@ public class Tests {
             assertFalse(enteredText.matches("^[0-9]*$"));
         }
 
+        @Test
+        @DisplayName("Preço field accepts only numbers")
+        public void testPrecoFieldAcceptsOnlyNumbers() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            WebElement precoField = driver.findElement(By.name("preco"));
+
+            precoField.sendKeys("abc123");
+
+            String enteredText = precoField.getAttribute("value");
+
+            assertTrue(enteredText.matches("^[0-9]*$"));
+        }
+
 
     }
 
