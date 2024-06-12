@@ -214,6 +214,21 @@ public class Tests {
             assertTrue(enteredText.matches("^[0-9]*$"));
         }
 
+        @Test
+        @DisplayName("Ano field accepts only numbers")
+        public void testAnoFieldAcceptsOnlyNumbers() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            WebElement anoField = driver.findElement(By.name("ano"));
+
+            anoField.sendKeys("abc123");
+
+            String enteredText = anoField.getAttribute("value");
+
+            assertTrue(enteredText.matches("^[0-9]*$"));
+        }
+
+
 
     }
 
