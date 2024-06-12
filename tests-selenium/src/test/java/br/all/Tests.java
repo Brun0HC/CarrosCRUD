@@ -1,5 +1,6 @@
 package br.all;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -15,6 +16,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Tests {
+
+    private Faker faker = new Faker();
 
     private WebDriver driver;
 
@@ -226,6 +229,7 @@ public class Tests {
             String enteredText = anoField.getAttribute("value");
 
             assertTrue(enteredText.matches("^[0-9]*$"));
+
         }
         @Test
         @DisplayName("Preço field accepts float values")
