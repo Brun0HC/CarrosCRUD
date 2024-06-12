@@ -227,6 +227,19 @@ public class Tests {
 
             assertTrue(enteredText.matches("^[0-9]*$"));
         }
+        @Test
+        @DisplayName("Preço field accepts float values")
+        public void testPrecoFieldAcceptsFloatValues() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            WebElement precoField = driver.findElement(By.name("preco"));
+
+            precoField.sendKeys("123.45");
+
+            String enteredText = precoField.getAttribute("value");
+
+            assertTrue(enteredText.matches("^[0-9]*\\.?[0-9]+$"));
+        }
 
 
 
