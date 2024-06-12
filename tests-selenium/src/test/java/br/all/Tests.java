@@ -311,6 +311,33 @@ public class Tests {
             alert.accept();
         }
 
+        @Test
+        @DisplayName("Should fail due a potency value too big")
+        public void failDuePotencyValueTooBig() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement nomeInput = driver.findElement(By.name("nome"));
+            WebElement anoInput = driver.findElement(By.name("ano"));
+            WebElement potenciaInput = driver.findElement(By.name("potencia"));
+            WebElement precoInput = driver.findElement(By.name("preco"));
+            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
+            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+
+            nomeInput.sendKeys("Teste Carro");
+            anoInput.sendKeys("2000");
+            potenciaInput.sendKeys("2147483648");
+            precoInput.sendKeys("50000");
+            fabricanteInput.sendKeys("Fabricante Teste");
+
+            submitButton.click();
+
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            assertEquals("Erro ao cadastrar o carro.", alertText);
+
+            alert.accept();
+        }
+
     }
 }
 
