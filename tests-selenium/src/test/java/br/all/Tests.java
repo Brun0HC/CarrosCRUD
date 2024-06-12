@@ -55,6 +55,22 @@ public class Tests {
     @DisplayName("Successful Actions")
     class validActions{
         @Test
+        @DisplayName("Delete button works as expected")
+        public void testDeleteButtonWorks() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            assertTrue(isElementPresent(By.xpath("//button[contains(text(), 'Excluir')]")));
+
+            WebElement deleteButton = driver.findElement(By.xpath("//button[contains(text(), 'Excluir')]"));
+            deleteButton.click();
+
+            assertFalse(isElementPresent(By.xpath("//button[contains(text(), 'Excluir')]")));
+        }
+
+        private boolean isElementPresent(By by) {
+            return !driver.findElements(by).isEmpty();
+        }
+        @Test
         @DisplayName("Test to verify the functionality of the submit button")
         public void testEditButtonFunctionality() {
             driver.get("https://carros-crud.vercel.app/");
