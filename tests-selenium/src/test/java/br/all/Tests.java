@@ -338,6 +338,34 @@ public class Tests {
             alert.accept();
         }
 
+        @Test
+        @DisplayName("Should fail due a price value too big")
+        public void failDuePriceValueTooBig() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement nomeInput = driver.findElement(By.name("nome"));
+            WebElement anoInput = driver.findElement(By.name("ano"));
+            WebElement potenciaInput = driver.findElement(By.name("potencia"));
+            WebElement precoInput = driver.findElement(By.name("preco"));
+            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
+            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+
+            String longString = ("4").repeat(100);
+            nomeInput.sendKeys("Teste Carro");
+            anoInput.sendKeys("2000");
+            potenciaInput.sendKeys("200");
+            precoInput.sendKeys(longString);
+            fabricanteInput.sendKeys("Fabricante Teste");
+
+            submitButton.click();
+
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            assertEquals("Erro ao cadastrar o carro.", alertText);
+
+            alert.accept();
+        }
+
     }
 }
 
