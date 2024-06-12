@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.Locale;
 
 import java.time.Duration;
 import java.util.List;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Tests {
 
-    private Faker faker = new Faker();
+    private final Faker faker = new Faker();
 
     private WebDriver driver;
 
@@ -36,14 +35,19 @@ public class Tests {
         }
     }
 
-    public class JavaFakerTests {
+    @Test
+    public void testCarFormSubmission() {
+        driver.get("https://carros-crud.vercel.app/");
 
-        private Faker faker;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        @BeforeEach
-        public void setUp() {
-            faker = new Faker(new Locale("en-US"));
-        }
+        WebElement nomeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nome")));
+        nomeField.sendKeys(faker.name().fullName());
+
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+        submitButton.click();
+    }
 
 
     @Nested
@@ -404,7 +408,7 @@ public class Tests {
 
     }
 
-}
+
 
 
 
