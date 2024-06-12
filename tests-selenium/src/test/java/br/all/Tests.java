@@ -1,9 +1,6 @@
 package br.all;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -188,31 +185,49 @@ public class Tests {
         assertFalse(editButtons.size() > 0, "Edit buttons are present on the page");
     }
 
-    @Test
-    @DisplayName("Should make a successful registration")
-    public void testCompleteFormSubmission() {
-        driver.get("https://carros-crud.vercel.app/");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement nomeInput = driver.findElement(By.name("nome"));
-        WebElement anoInput = driver.findElement(By.name("ano"));
-        WebElement potenciaInput = driver.findElement(By.name("potencia"));
-        WebElement precoInput = driver.findElement(By.name("preco"));
-        WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+    @Nested
+    @DisplayName("Successful Actions")
+    class validActions{
 
-        nomeInput.sendKeys("Carro Teste");
-        anoInput.sendKeys("2023");
-        potenciaInput.sendKeys("200");
-        precoInput.sendKeys("50000");
-        fabricanteInput.sendKeys("Fabricante Teste");
+        @Test
+        @DisplayName("Should make a successful registration")
+        public void testCompleteFormSubmission() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement nomeInput = driver.findElement(By.name("nome"));
+            WebElement anoInput = driver.findElement(By.name("ano"));
+            WebElement potenciaInput = driver.findElement(By.name("potencia"));
+            WebElement precoInput = driver.findElement(By.name("preco"));
+            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
+            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-        submitButton.click();
+            nomeInput.sendKeys("Carro Teste");
+            anoInput.sendKeys("2023");
+            potenciaInput.sendKeys("200");
+            precoInput.sendKeys("50000");
+            fabricanteInput.sendKeys("Fabricante Teste");
 
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        String alertText = alert.getText();
-        assertEquals("Carro cadastrado com sucesso!", alertText);
+            submitButton.click();
 
-        alert.accept();
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            assertEquals("Carro cadastrado com sucesso!", alertText);
+
+            alert.accept();
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Fail Actions")
+    class InvalidActions{
+
+    }
+
+    @Nested
+    @DisplayName("Overload Tests")
+    class OverloadTests{
+
     }
 }
 
