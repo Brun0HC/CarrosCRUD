@@ -112,6 +112,29 @@ public class Tests {
         }
 
         @Test
+        @DisplayName("Name field accepts special characters")
+        public void testNameFieldDoesNotAcceptSpecialCharacters() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            captureAndFillForm(
+                    "Carro #1",
+                    faker.number().digits(6),
+                    faker.number().digits(5),
+                    faker.number().digits(5),
+                    faker.name().name());
+
+            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Editar')]"));
+            submitButton.click();
+
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            assertEquals("Carro cadastrado com sucesso!", alertText);
+
+            alert.accept();
+
+        }
+        @Test
         @DisplayName("Delete button works as expected")
         public void testDeleteButtonWorks() {
             driver.get("https://carros-crud.vercel.app/");
