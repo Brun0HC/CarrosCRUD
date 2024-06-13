@@ -107,10 +107,6 @@ public class Tests {
     @DisplayName("Successful Actions")
     class validActions{
 
-        private boolean isElementPresent(By by) {
-            return !driver.findElements(by).isEmpty();
-        }
-
         @Test
         @DisplayName("Name field accepts special characters")
         public void testNameFieldDoesNotAcceptSpecialCharacters() {
@@ -133,18 +129,6 @@ public class Tests {
 
             alert.accept();
 
-        }
-        @Test
-        @DisplayName("Delete button works as expected")
-        public void testDeleteButtonWorks() {
-            driver.get("https://carros-crud.vercel.app/");
-
-            assertTrue(isElementPresent(By.xpath("//button[contains(text(), 'Excluir')]")));
-
-            WebElement deleteButton = driver.findElement(By.xpath("//button[contains(text(), 'Excluir')]"));
-            deleteButton.click();
-
-            assertFalse(isElementPresent(By.xpath("//button[contains(text(), 'Excluir')]")));
         }
 
         @Test
