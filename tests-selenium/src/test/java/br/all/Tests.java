@@ -140,7 +140,6 @@ public class Tests {
             WebElement precoField = driver.findElement(By.name("preco"));
             WebElement fabricanteField = driver.findElement(By.name("fabricante"));
 
-            // Editamos os campos com novos valores
             nomeField.clear();
             nomeField.sendKeys("Carro Editado");
             anoField.clear();
@@ -202,20 +201,14 @@ public class Tests {
         public void testCompleteFormSubmission() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            nomeInput.sendKeys("Carro Teste");
-            anoInput.sendKeys("2023");
-            potenciaInput.sendKeys("200");
-            precoInput.sendKeys("50000");
-            fabricanteInput.sendKeys("Fabricante Teste");
-
-            submitButton.click();
+            captureAndFillForm(
+                    faker.rickAndMorty().character(),
+                    faker.number().digits(4),
+                    faker.number().digits(3),
+                    faker.number().digits(6),
+                    faker.aquaTeenHungerForce().character()
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
