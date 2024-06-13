@@ -69,7 +69,54 @@ public class Tests {
         submitButton.click();
     }
 
+    @Nested
+    @DisplayName("Find Elements")
+    class FindElements {
+        @Test
+        @DisplayName("Table is present on the page")
+        public void testTableIsPresent() {
+            driver.get("https://carros-crud.vercel.app/");
+            boolean isTablePresent = driver.findElements(By.className("styled-table")).size() > 0;
+            assertTrue(isTablePresent);
+        }
 
+
+        @Test
+        @DisplayName("Form is present on the page")
+        public void testFormIsPresent() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebElement form = driver.findElement(By.tagName("form"));
+            assertTrue(form.isDisplayed());
+        }
+        @Test
+        @DisplayName("Edit buttons are present on the page")
+        public void testEditButtonsArePresent() {
+            driver.get("https://carros-crud.vercel.app/");
+            List<WebElement> editButtons = driver.findElements(By.xpath("//button[contains(text(),'Editar')]"));
+            assertFalse(editButtons.size() > 0);
+        }
+
+        @Test
+        @DisplayName("O botão 'Enviar' está presente")
+        public void testElementIsPresent() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            WebElement addButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+            assertTrue(addButton.isDisplayed());
+        }
+
+        @Test
+        @DisplayName("O título da página está correto")
+        public void testHomePageLoads() {
+            driver.get("https://carros-crud.vercel.app/");
+
+            String pageTitle = driver.getTitle();
+            System.out.println("O título da página é: " + pageTitle);
+
+            assertTrue(pageTitle.equalsIgnoreCase("vite + react"));
+        }
+
+    }
 
     @Nested
     @DisplayName("Successful Actions")
@@ -121,8 +168,6 @@ public class Tests {
 
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Editar')]"));
             submitButton.click();
-
-
         }
 
         @Test
@@ -148,9 +193,7 @@ public class Tests {
 
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
             submitButton.click();
-
         }
-
 
         @Test
         @DisplayName("'The <h1> element contains 'Formulário de Carros'")
@@ -166,50 +209,6 @@ public class Tests {
             assertFalse(h1Element.getText().equals("Formulário de Carros"));
 
             driver.quit();
-        }
-
-        @Test
-        @DisplayName("Table is present on the page")
-        public void testTableIsPresent() {
-            driver.get("https://carros-crud.vercel.app/");
-            boolean isTablePresent = driver.findElements(By.className("styled-table")).size() > 0;
-            assertTrue(isTablePresent);
-        }
-
-
-        @Test
-        @DisplayName("Form is present on the page")
-        public void testFormIsPresent() {
-            driver.get("https://carros-crud.vercel.app/");
-            WebElement form = driver.findElement(By.tagName("form"));
-            assertTrue(form.isDisplayed());
-        }
-        @Test
-        @DisplayName("Edit buttons are present on the page")
-        public void testEditButtonsArePresent() {
-            driver.get("https://carros-crud.vercel.app/");
-            List<WebElement> editButtons = driver.findElements(By.xpath("//button[contains(text(),'Editar')]"));
-            assertFalse(editButtons.size() > 0);
-        }
-
-        @Test
-        @DisplayName("O botão 'Enviar' está presente")
-        public void testElementIsPresent() {
-            driver.get("https://carros-crud.vercel.app/");
-
-            WebElement addButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
-            assertTrue(addButton.isDisplayed());
-        }
-
-        @Test
-        @DisplayName("O título da página está correto")
-        public void testHomePageLoads() {
-            driver.get("https://carros-crud.vercel.app/");
-
-            String pageTitle = driver.getTitle();
-            System.out.println("O título da página é: " + pageTitle);
-
-            assertTrue(pageTitle.equalsIgnoreCase("vite + react"));
         }
 
         @Test
