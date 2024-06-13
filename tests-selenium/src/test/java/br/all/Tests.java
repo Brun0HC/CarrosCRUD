@@ -314,11 +314,10 @@ public class Tests {
     @DisplayName("Overload Tests")
     class OverloadTests{
 
-        @Test
-        @DisplayName("Should fail due a name with too many characters")
-        public void failDueTooManyCharactersInName() {
+        private void captureAndFillForm(String nome, String ano, String potencia, String preco, String fabricante) {
+
             driver.get("https://carros-crud.vercel.app/");
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
             WebElement nomeInput = driver.findElement(By.name("nome"));
             WebElement anoInput = driver.findElement(By.name("ano"));
             WebElement potenciaInput = driver.findElement(By.name("potencia"));
@@ -326,14 +325,28 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longstring = faker.dragonBall().character().repeat(1000);
-            nomeInput.sendKeys(longstring);
-            anoInput.sendKeys(faker.number().digits(4));
-            potenciaInput.sendKeys(faker.number().digits(3));
-            precoInput.sendKeys(faker.number().digits(6));
-            fabricanteInput.sendKeys(faker.name().firstName());
+            nomeInput.sendKeys(nome);
+            anoInput.sendKeys(ano);
+            potenciaInput.sendKeys(potencia);
+            precoInput.sendKeys(preco);
+            fabricanteInput.sendKeys(fabricante);
 
             submitButton.click();
+        }
+
+        @Test
+        @DisplayName("Should fail due a name with too many characters")
+        public void failDueTooManyCharactersInName() {
+            driver.get("https://carros-crud.vercel.app/");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            captureAndFillForm(
+                    faker.rickAndMorty().character().repeat(1000),
+                    faker.number().digits(4),
+                    faker.number().digits(3),
+                    faker.number().digits(6),
+                    faker.name().firstName()
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
@@ -347,21 +360,14 @@ public class Tests {
         public void failDueTooManyCharactersInProducer() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longstring = faker.gameOfThrones().character().repeat(1000);
-            nomeInput.sendKeys(faker.name().firstName());
-            anoInput.sendKeys(faker.number().digits(4));
-            potenciaInput.sendKeys(faker.number().digits(3));
-            precoInput.sendKeys(faker.number().digits(6));
-            fabricanteInput.sendKeys(longstring);
-
-            submitButton.click();
+            captureAndFillForm(
+                    faker.name().firstName(),
+                    faker.number().digits(4),
+                    faker.number().digits(3),
+                    faker.number().digits(6),
+                    faker.gameOfThrones().character().repeat(1000)
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
@@ -375,20 +381,14 @@ public class Tests {
         public void failDueYearTooBig() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            nomeInput.sendKeys(faker.rickAndMorty().character());
-            anoInput.sendKeys("2147483648");
-            potenciaInput.sendKeys(faker.number().digits(3));
-            precoInput.sendKeys(faker.number().digits(6));
-            fabricanteInput.sendKeys(faker.rickAndMorty().character());
-
-            submitButton.click();
+            captureAndFillForm(
+                    faker.rickAndMorty().character(),
+                    "2147483648",
+                    faker.number().digits(3),
+                    faker.number().digits(6),
+                    faker.rickAndMorty().character()
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
@@ -402,20 +402,14 @@ public class Tests {
         public void failDuePotencyValueTooBig() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            nomeInput.sendKeys(faker.leagueOfLegends().champion());
-            anoInput.sendKeys(faker.number().digits(4));
-            potenciaInput.sendKeys("2147483648");
-            precoInput.sendKeys(faker.number().digits(6));
-            fabricanteInput.sendKeys(faker.leagueOfLegends().champion());
-
-            submitButton.click();
+            captureAndFillForm(
+                    faker.leagueOfLegends().champion(),
+                    faker.number().digits(4),
+                    "2147483648",
+                    faker.number().digits(6),
+                    faker.leagueOfLegends().champion()
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
@@ -429,21 +423,14 @@ public class Tests {
         public void failDuePriceValueTooBig() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longString = faker.number().digits(100);
-            nomeInput.sendKeys(faker.backToTheFuture().character());
-            anoInput.sendKeys(faker.number().digits(4));
-            potenciaInput.sendKeys(faker.number().digits(3));
-            precoInput.sendKeys(longString);
-            fabricanteInput.sendKeys(faker.backToTheFuture().character());
-
-            submitButton.click();
+            captureAndFillForm(
+                faker.backToTheFuture().character(),
+                faker.number().digits(4),
+                faker.number().digits(3),
+                faker.number().digits(100),
+                faker.backToTheFuture().character()
+            );
 
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
