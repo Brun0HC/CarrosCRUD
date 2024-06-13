@@ -21,6 +21,26 @@ public class Tests {
 
     private WebDriver driver;
 
+    private void captureAndFillForm(String nome, String ano, String potencia, String preco, String fabricante) {
+
+        driver.get("https://carros-crud.vercel.app/");
+
+        WebElement nomeInput = driver.findElement(By.name("nome"));
+        WebElement anoInput = driver.findElement(By.name("ano"));
+        WebElement potenciaInput = driver.findElement(By.name("potencia"));
+        WebElement precoInput = driver.findElement(By.name("preco"));
+        WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
+        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
+
+        nomeInput.sendKeys(nome);
+        anoInput.sendKeys(ano);
+        potenciaInput.sendKeys(potencia);
+        precoInput.sendKeys(preco);
+        fabricanteInput.sendKeys(fabricante);
+
+        submitButton.click();
+    }
+
     @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
@@ -313,26 +333,6 @@ public class Tests {
     @Nested
     @DisplayName("Overload Tests")
     class OverloadTests{
-
-        private void captureAndFillForm(String nome, String ano, String potencia, String preco, String fabricante) {
-
-            driver.get("https://carros-crud.vercel.app/");
-
-            WebElement nomeInput = driver.findElement(By.name("nome"));
-            WebElement anoInput = driver.findElement(By.name("ano"));
-            WebElement potenciaInput = driver.findElement(By.name("potencia"));
-            WebElement precoInput = driver.findElement(By.name("preco"));
-            WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
-            WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
-
-            nomeInput.sendKeys(nome);
-            anoInput.sendKeys(ano);
-            potenciaInput.sendKeys(potencia);
-            precoInput.sendKeys(preco);
-            fabricanteInput.sendKeys(fabricante);
-
-            submitButton.click();
-        }
 
         @Test
         @DisplayName("Should fail due a name with too many characters")
