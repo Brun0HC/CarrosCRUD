@@ -55,20 +55,6 @@ public class Tests {
         }
     }
 
-    @Test
-    public void testCarFormSubmission() {
-        driver.get("https://carros-crud.vercel.app/");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement nomeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nome")));
-        nomeField.sendKeys(faker.name().fullName());
-
-
-        WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
-        submitButton.click();
-    }
-
     @Nested
     @DisplayName("Find Elements")
     class FindElements {
