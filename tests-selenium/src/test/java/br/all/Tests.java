@@ -308,9 +308,6 @@ public class Tests {
 
             assertTrue(enteredText.matches("^[0-9]*\\.?[0-9]+$"));
         }
-
-
-
     }
 
     @Nested
@@ -329,12 +326,12 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longstring = ("a").repeat(10000);
+            String longstring = faker.dragonBall().character().repeat(1000);
             nomeInput.sendKeys(longstring);
-            anoInput.sendKeys("2023");
-            potenciaInput.sendKeys("200");
-            precoInput.sendKeys("50000");
-            fabricanteInput.sendKeys("Fabricante Teste");
+            anoInput.sendKeys(faker.number().digits(4));
+            potenciaInput.sendKeys(faker.number().digits(3));
+            precoInput.sendKeys(faker.number().digits(6));
+            fabricanteInput.sendKeys(faker.name().firstName());
 
             submitButton.click();
 
@@ -347,7 +344,7 @@ public class Tests {
 
         @Test
         @DisplayName("Should fail due a producer with too many characters")
-        public void failDueTooManyCharactersInYear() {
+        public void failDueTooManyCharactersInProducer() {
             driver.get("https://carros-crud.vercel.app/");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement nomeInput = driver.findElement(By.name("nome"));
@@ -357,11 +354,11 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longstring = ("a").repeat(10000);
-            nomeInput.sendKeys("Teste Carro");
-            anoInput.sendKeys("2023");
-            potenciaInput.sendKeys("200");
-            precoInput.sendKeys("50000");
+            String longstring = faker.gameOfThrones().character().repeat(1000);
+            nomeInput.sendKeys(faker.name().firstName());
+            anoInput.sendKeys(faker.number().digits(4));
+            potenciaInput.sendKeys(faker.number().digits(3));
+            precoInput.sendKeys(faker.number().digits(6));
             fabricanteInput.sendKeys(longstring);
 
             submitButton.click();
@@ -385,11 +382,11 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            nomeInput.sendKeys("Teste Carro");
+            nomeInput.sendKeys(faker.rickAndMorty().character());
             anoInput.sendKeys("2147483648");
-            potenciaInput.sendKeys("200");
-            precoInput.sendKeys("50000");
-            fabricanteInput.sendKeys("Fabricante Teste");
+            potenciaInput.sendKeys(faker.number().digits(3));
+            precoInput.sendKeys(faker.number().digits(6));
+            fabricanteInput.sendKeys(faker.rickAndMorty().character());
 
             submitButton.click();
 
@@ -412,11 +409,11 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            nomeInput.sendKeys("Teste Carro");
-            anoInput.sendKeys("2000");
+            nomeInput.sendKeys(faker.leagueOfLegends().champion());
+            anoInput.sendKeys(faker.number().digits(4));
             potenciaInput.sendKeys("2147483648");
-            precoInput.sendKeys("50000");
-            fabricanteInput.sendKeys("Fabricante Teste");
+            precoInput.sendKeys(faker.number().digits(6));
+            fabricanteInput.sendKeys(faker.leagueOfLegends().champion());
 
             submitButton.click();
 
@@ -439,12 +436,12 @@ public class Tests {
             WebElement fabricanteInput = driver.findElement(By.name("fabricante"));
             WebElement submitButton = driver.findElement(By.xpath("//button[contains(text(),'Enviar')]"));
 
-            String longString = ("4").repeat(100);
-            nomeInput.sendKeys("Teste Carro");
-            anoInput.sendKeys("2000");
-            potenciaInput.sendKeys("200");
+            String longString = faker.number().digits(100);
+            nomeInput.sendKeys(faker.backToTheFuture().character());
+            anoInput.sendKeys(faker.number().digits(4));
+            potenciaInput.sendKeys(faker.number().digits(3));
             precoInput.sendKeys(longString);
-            fabricanteInput.sendKeys("Fabricante Teste");
+            fabricanteInput.sendKeys(faker.backToTheFuture().character());
 
             submitButton.click();
 
