@@ -66,7 +66,6 @@ public class Tests {
             assertTrue(isTablePresent);
         }
 
-
         @Test
         @DisplayName("Form is present on the page")
         public void testFormIsPresent() {
@@ -74,6 +73,7 @@ public class Tests {
             WebElement form = driver.findElement(By.tagName("form"));
             assertTrue(form.isDisplayed());
         }
+
         @Test
         @DisplayName("Edit buttons are present on the page")
         public void testEditButtonsArePresent() {
@@ -101,12 +101,16 @@ public class Tests {
 
             assertTrue(pageTitle.equalsIgnoreCase("vite + react"));
         }
-
     }
 
     @Nested
     @DisplayName("Successful Actions")
     class validActions{
+
+        private boolean isElementPresent(By by) {
+            return !driver.findElements(by).isEmpty();
+        }
+
         @Test
         @DisplayName("Delete button works as expected")
         public void testDeleteButtonWorks() {
@@ -120,9 +124,6 @@ public class Tests {
             assertFalse(isElementPresent(By.xpath("//button[contains(text(), 'Excluir')]")));
         }
 
-        private boolean isElementPresent(By by) {
-            return !driver.findElements(by).isEmpty();
-        }
         @Test
         @DisplayName("Test to verify the functionality of the submit button")
         public void testEditButtonFunctionality() {
